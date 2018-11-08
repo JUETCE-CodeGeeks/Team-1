@@ -1,0 +1,28 @@
+I have solved this problem in 3 approaches.
+	31-10-18 Brute Force Approach: In this solution, the program just tries 
+every possible combination of candies available and compares those combinations 
+to know maximum sweetness he can get.
+	31-10-18 dp: It also tries every possible combinations but it implements
+dynamic programming to reduce the computational effort and enhances efficiency.
+	31-10-18 cumulative-bst: This is the most efficient solution of mine for
+this problem. At first, I made a cumulative list of sweetness for the list of 
+candies.
+For example, that means if the sweetness of 4 candies are: [1,4,5,6]
+Cumulative list will be: [1,5,10,16]. Let this list be called L 
+Now, sum of sweetness of contiguous candies between candy i and candy j would 
+be L[j]-L[i]
+Now, let's call S[l,r] be the total no. of odd candies between Candies l and r.
+So, for each l, we find rmax such that S[l,rmax] is just less than O(maximum no. of odd 
+candies allowed to take in). Mathematically, S[l,rmax]<O<S[l,rmax+1] or rmax==n-1(Last candy
+in the list). So, when we have found this rmax, we know we can choose r to be in range of 
+[l,rmax](as in this range, no. of odd candies in the range is less than O). Now, we have to
+consider every possible combinations in this range. But, we have to do this with an efficient method to 
+reduce computational effort. We will need a data structure in which we can add integers, remove integers
+when required and return largest number less than a queried integer. Now,to implement this, we can use 
+several data structures:
+1)Binary Search Tree (For C++, Java, Python(Not Recommended for this Problem))
+2)Pair(For C++ STL)
+3)Multiset(In C++, Java). You can also use 'set', but you have to use this a bit cleverly to get the desired
+result(As, Set doesn't support Duplicate items. That's where it differentiates from Multiset. However, we can
+stil use 'set' if we keep a count of same items or make a linked list of same items)
+Once we have made this Data Structure, we can query max sum less than L[l]+D in the range [l,r].
